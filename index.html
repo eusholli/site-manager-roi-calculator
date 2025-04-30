@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rakuten Site Manager ROI Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="https://cdn.prod.website-files.com/6317e170a9eabbe0fbbf4519/6317e170a9eabb60ecbf46c6_Rakuten-Company.svg"
+                alt="Rakuten Symphony Logo" class="rakuten-logo">
+        </div>
+        <h1>Rakuten Site Manager ROI Calculator</h1>
+    </header>
+
+    <main>
+        <section id="calculator-container">
+            <section id="inputs">
+                <h2>Your Current Operations</h2>
+                <form id="roi-form">
+                    <div class="input-group">
+                        <label for="numSites">Number of Sites/Projects Managed per Year:</label>
+                        <input type="number" id="numSites" name="numSites" value="500" min="1" required>
+                        <!-- Add tooltip/info icon later -->
+                    </div>
+                    <div class="input-group">
+                        <label for="avgDuration">Average Project Duration (weeks):</label>
+                        <input type="number" id="avgDuration" name="avgDuration" value="20" min="1" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="avgCost">Average Cost per Site/Project ($):</label>
+                        <input type="number" id="avgCost" name="avgCost" value="50000" min="0" step="100" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="onTimeRate">Current On-Time Completion Rate (%):</label>
+                        <input type="number" id="onTimeRate" name="onTimeRate" value="60" min="0" max="100" step="1"
+                            required>
+                    </div>
+                    <div class="input-group">
+                        <label for="laborCost">Labor Cost per Site ($):</label>
+                        <input type="number" id="laborCost" name="laborCost" value="15000" min="0" step="100" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="adminHours">Manual Admin Hours per Site:</label>
+                        <input type="number" id="adminHours" name="adminHours" value="10" min="0" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="adminWage">Hourly Wage for Admin/PM Staff ($):</label>
+                        <input type="number" id="adminWage" name="adminWage" value="50" min="0" step="1" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="efficiencyGain">Expected Efficiency Improvement (%):</label>
+                        <input type="number" id="efficiencyGain" name="efficiencyGain" value="30" min="0" max="100"
+                            step="1" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="costReduction">Expected Cost Reduction (%):</label>
+                        <input type="number" id="costReduction" name="costReduction" value="20" min="0" max="100"
+                            step="1" required>
+                    </div>
+                    <!-- Platform Cost input removed as requested -->
+                </form>
+            </section>
+
+            <section id="outputs">
+                <h2>Projected Results with Site Manager</h2>
+
+                <div id="summaryBanner">
+                    <div>
+                        <h3>Total Annual Savings</h3>
+                        <span id="outputTotalSavings">$0</span>
+                    </div>
+                    <div>
+                        <h3>Return on Investment (ROI)</h3>
+                        <span id="outputROI">0%</span>
+                    </div>
+                </div>
+
+                <div id="detailedResults">
+                    <h3>Detailed Breakdown:</h3>
+                    <p>New Average Project Duration: <span id="outputNewDuration">0</span> weeks</p>
+                    <p>Total Weeks Saved Annually: <span id="outputWeeksSaved">0</span></p>
+                    <p>Total Project Cost Savings per Year: <span id="outputCostSavings">$0</span></p>
+                    <p>Total Admin/Labor Cost Savings per Year: <span id="outputAdminSavings">$0</span></p>
+                    <!-- Breakeven point removed as it's no longer relevant without platform cost -->
+                </div>
+
+                <div id="visualizations">
+                    <h3>Visualizations:</h3>
+                    <div class="chart-container">
+                        <h4>Savings Breakdown</h4>
+                        <div id="savingsPieChart" class="placeholder-chart">Pie Chart Placeholder</div>
+                    </div>
+                    <div class="chart-container">
+                        <h4>Project Duration (Before vs. After)</h4>
+                        <div id="durationBarChart" class="placeholder-chart">Bar Chart Placeholder</div>
+                    </div>
+                    <!-- Breakeven Timeline removed as it's no longer relevant without platform cost -->
+                </div>
+            </section>
+        </section>
+
+        <section id="cta">
+            <h2>Ready to see Site Manager in action?</h2>
+            <a href="https://symphony.rakuten.com/#help-form" target="_blank" class="cta-button">Contact Rakuten
+                Symphony</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; <span id="currentYear"></span> Rakuten Symphony. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js" defer></script>
+</body>
+
+</html>

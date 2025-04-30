@@ -1,0 +1,490 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 
+ * NOTE: The Rakuten Sans font appears to be a proprietary font that would need to be obtained
+ * from Rakuten Symphony's design team. For now, we'll use system sans-serif fonts as fallback.
+ * When deploying to production, replace this with the actual Rakuten Sans font import.
+ * 
+ * Example once you have the proper URL: 
+ * @import url('https://fonts.example.com/rakuten-sans.css');
+ */
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700&display=swap');
+
+:root {
+    /* Colors from RS_design.json */
+    --primary-color: #293a7a;
+    --secondary-color: #ecebf3;
+    --accent-color: #d10000; /* Rakuten Red */
+    --background-color: #ffffff;
+    --text-color: #000000;
+    --text-light: #333333; /* Slightly lighter text */
+    --border-color: #cccccc;
+    --placeholder-bg: #f0f0f0; /* For chart placeholders */
+
+    /* Typography from RS_design.json with Montserrat as fallback */
+    --font-family-headings: "Rakuten Sans", Montserrat, sans-serif; /* Use Montserrat as fallback */
+    --font-family-body: "Rakuten Sans", Montserrat, sans-serif;    /* Use Montserrat as fallback */
+
+    /* Font Sizes (approximate mapping) */
+    --font-size-h1: 3.0rem;  /* Mapped from 75px */
+    --font-size-h2: 2.0rem;  /* Mapped from 36px/40px */
+    --font-size-h3: 1.5rem;  /* Mapped from 40px/24px */
+    --font-size-body: 1.125rem; /* Mapped from 18px */
+    --font-size-small: 0.9rem;
+
+    /* Font Weights */
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700; /* Added for emphasis */
+
+    /* Spacing (using common units from RS_design.json as base) */
+    --spacing-xs: 5px;
+    --spacing-s: 10px;
+    --spacing-m: 20px;
+    --spacing-l: 30px;
+    --spacing-xl: 40px; /* Added for larger gaps */
+
+    /* Borders */
+    --border-radius: 4px; /* Common web default, adjust if needed */
+    --border-standard: 1px solid var(--border-color);
+}
+
+body {
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-body);
+    font-weight: var(--font-weight-light);
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    padding: var(--spacing-m);
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-family-headings);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-m);
+    color: var(--primary-color); /* Use primary color for headings */
+}
+
+h1 {
+    font-size: var(--font-size-h1);
+    text-align: center;
+    margin-bottom: var(--spacing-l);
+    font-weight: var(--font-weight-semibold); /* H1 weight from JSON */
+}
+
+h2 {
+    font-size: var(--font-size-h2);
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: var(--spacing-s);
+    margin-top: var(--spacing-l);
+    font-weight: var(--font-weight-normal); /* H2 weight from JSON */
+}
+
+h3 {
+    font-size: var(--font-size-h3);
+    font-weight: var(--font-weight-semibold); /* H3 weight from JSON */
+    margin-bottom: var(--spacing-s);
+}
+
+h4 {
+     font-size: 1.2rem; /* Mapped from H4 24px */
+     font-weight: var(--font-weight-light); /* H4 weight from JSON */
+     color: var(--text-light);
+     margin-bottom: var(--spacing-xs);
+}
+
+
+p {
+    margin-bottom: var(--spacing-m);
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+header, footer {
+    text-align: center;
+    margin-bottom: var(--spacing-l);
+    padding: var(--spacing-m) 0;
+}
+
+/* Logo styling */
+.logo-container {
+    margin-bottom: var(--spacing-m);
+}
+
+.rakuten-logo {
+    max-width: 200px;
+    height: auto;
+}
+
+footer {
+    margin-top: var(--spacing-xl);
+    border-top: 1px solid var(--secondary-color);
+    padding-top: var(--spacing-m);
+    font-size: var(--font-size-small);
+    color: var(--text-light);
+}
+
+main {
+    max-width: 1200px; /* Limit overall width */
+    margin: 0 auto; /* Center the main content */
+}
+
+#calculator-container {
+    display: grid; /* Use grid for layout */
+    grid-template-columns: 1fr 1fr; /* Default two columns */
+    gap: var(--spacing-xl);
+}
+
+/* Basic placeholder style */
+.placeholder-chart {
+    background-color: var(--placeholder-bg);
+    border: var(--border-standard);
+    padding: var(--spacing-l);
+    text-align: center;
+    color: var(--text-light);
+    min-height: 150px; /* Give it some height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius);
+    position: relative; /* Needed for potential pseudo-elements or overlays */
+    overflow: hidden; /* Hide overflow if needed */
+}
+
+/* Pie Chart Specific Styles */
+#savingsPieChart {
+    width: 150px; /* Adjust size as needed */
+    height: 150px;
+    border-radius: 50%; /* Make it a circle */
+    background-color: var(--placeholder-bg); /* Fallback */
+    /* Conic gradient will be set by JS */
+    margin: var(--spacing-m) auto; /* Center the chart */
+    border: none; /* Remove placeholder border */
+    position: relative; /* For potential inner circle/label */
+}
+
+/* Optional: Add a donut hole effect */
+#savingsPieChart::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%; /* Adjust hole size */
+    height: 60%;
+    background: var(--background-color); /* Match output section background */
+    border-radius: 50%;
+    z-index: 1;
+}
+
+
+/* Legend Styling */
+.legend {
+    list-style: none;
+    padding: 0;
+    margin-top: var(--spacing-m);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-m);
+}
+
+.legend li {
+    display: flex;
+    align-items: center;
+    font-size: var(--font-size-small);
+}
+
+.legend span {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: var(--spacing-xs);
+}
+
+/* Bar Chart Specific Styles */
+#durationBarChart {
+    display: flex;
+    justify-content: space-around; /* Space out bars */
+    align-items: flex-end; /* Align bars to the bottom */
+    height: 150px; /* Match pie chart height */
+    padding: var(--spacing-s);
+    border: none; /* Remove placeholder border */
+    background-color: transparent; /* Remove placeholder background */
+}
+
+.bar-chart-bar {
+    width: 40px; /* Width of each bar */
+    background-color: var(--primary-color); /* Default bar color */
+    text-align: center;
+    position: relative; /* For labels */
+    border-radius: var(--border-radius) var(--border-radius) 0 0; /* Rounded top */
+    transition: height 0.3s ease-out; /* Animate height changes */
+}
+
+.bar-chart-bar.before {
+    background-color: #f44336; /* Red for 'Before' */
+}
+
+.bar-chart-bar.after {
+    background-color: #4CAF50; /* Green for 'After' */
+}
+
+.bar-chart-label {
+    position: absolute;
+    bottom: -25px; /* Position label below the bar */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: var(--font-size-small);
+    color: var(--text-light);
+    white-space: nowrap;
+}
+
+.bar-chart-value {
+    position: absolute;
+    top: -20px; /* Position value above the bar */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-color);
+}
+
+/* Breakeven Timeline Specific Styles */
+#breakevenTimeline {
+    height: auto; /* Override placeholder height */
+    min-height: 60px; /* Ensure some space */
+    padding: var(--spacing-l) var(--spacing-s); /* Adjust padding */
+    position: relative;
+    background-color: transparent; /* Remove placeholder background */
+    border: none; /* Remove placeholder border */
+    display: block; /* Change from flex */
+    overflow: visible; /* Allow marker to potentially stick out */
+}
+
+.timeline-line {
+    width: 100%;
+    height: 4px;
+    background-color: var(--border-color);
+    position: relative;
+    border-radius: 2px;
+    margin-top: var(--spacing-m); /* Space above line */
+}
+
+.timeline-marker {
+    position: absolute;
+    bottom: -5px; /* Position below the line */
+    transform: translateX(-50%);
+    font-size: 0.75rem;
+    color: var(--text-light);
+}
+
+.timeline-marker.zero { left: 0%; }
+.timeline-marker.six { left: 50%; }
+.timeline-marker.twelve { left: 100%; }
+/* Add more markers if needed for longer timelines */
+
+.breakeven-indicator {
+    position: absolute;
+    top: -8px; /* Position above the line */
+    width: 16px;
+    height: 16px;
+    background-color: var(--accent-color); /* Use accent color */
+    border-radius: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    border: 2px solid var(--background-color); /* Make it stand out */
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    display: none; /* Hidden by default, shown by JS */
+}
+
+.breakeven-indicator-label {
+    position: absolute;
+    top: -30px; /* Position label above indicator */
+    left: 0; /* Aligned with indicator */
+    transform: translateX(-50%);
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-semibold);
+    color: var(--accent-color);
+    background-color: var(--background-color);
+    padding: 2px 5px;
+    border-radius: var(--border-radius);
+    white-space: nowrap;
+    box-shadow: 0 0 3px rgba(0,0,0,0.2);
+}
+
+
+/* Input Section Styling */
+#inputs {
+    background-color: var(--secondary-color); /* Light background for inputs */
+    padding: var(--spacing-l);
+    border-radius: var(--border-radius);
+    border: 1px solid #ddd; /* Softer border */
+}
+
+.input-group {
+    margin-bottom: var(--spacing-m);
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-weight: var(--font-weight-normal);
+    color: var(--text-light);
+    font-size: var(--font-size-small);
+}
+
+.input-group input[type="number"] {
+    width: 100%;
+    padding: var(--spacing-s);
+    border: var(--border-standard);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-body);
+    font-family: var(--font-family-body);
+    /* Match RS_design form input style guidance */
+    background-color: var(--background-color);
+}
+
+/* Output Section Styling */
+#outputs {
+    padding: var(--spacing-l);
+    background-color: #f8f8f8; /* Slightly different background for outputs */
+    border-radius: var(--border-radius);
+    border: 1px solid #eee;
+}
+
+#summaryBanner {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    padding: var(--spacing-l);
+    border-radius: var(--border-radius);
+    margin-bottom: var(--spacing-l);
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns for savings and ROI */
+    gap: var(--spacing-m);
+}
+
+#summaryBanner h3 {
+    color: var(--background-color); /* White text on primary background */
+    font-size: 1.2rem; /* Slightly smaller heading in banner */
+    margin-bottom: var(--spacing-xs);
+    font-weight: var(--font-weight-normal);
+}
+
+#summaryBanner span {
+    font-size: 2.5rem; /* Large font for impact */
+    font-weight: var(--font-weight-bold);
+    display: block;
+}
+
+#detailedResults p {
+    margin-bottom: var(--spacing-s);
+    font-size: var(--font-size-body);
+    color: var(--text-light);
+}
+
+#detailedResults span {
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-color);
+    margin-left: var(--spacing-xs);
+}
+
+#visualizations .chart-container {
+    margin-bottom: var(--spacing-l);
+}
+
+/* Call to Action (CTA) Styling */
+#cta {
+    text-align: center;
+    margin-top: var(--spacing-xl);
+    padding: var(--spacing-l);
+    background-color: var(--secondary-color);
+    border-radius: var(--border-radius);
+}
+
+#cta h2 {
+    margin-bottom: var(--spacing-m);
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--accent-color); /* Use Rakuten Red */
+    color: var(--background-color);
+    padding: var(--spacing-m) var(--spacing-l);
+    border-radius: 20px; /* Match RS_design button radius */
+    font-weight: var(--font-weight-normal);
+    text-transform: none; /* Match RS_design button text transform */
+    border: none; /* Remove default border */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1.1rem; /* Slightly larger than body */
+}
+
+.cta-button:hover {
+    background-color: #a70000; /* Darker red on hover */
+    text-decoration: none;
+}
+
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    #calculator-container {
+        grid-template-columns: 1fr; /* Stack columns on smaller screens */
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    #summaryBanner span {
+        font-size: 2.0rem;
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: var(--spacing-s);
+    }
+
+    h1 {
+        font-size: 2.0rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    h3 {
+        font-size: 1.2rem;
+    }
+
+    #summaryBanner {
+        grid-template-columns: 1fr; /* Stack banner items */
+        gap: var(--spacing-m);
+    }
+
+     #summaryBanner span {
+        font-size: 1.8rem;
+    }
+
+    .cta-button {
+        padding: var(--spacing-s) var(--spacing-m);
+        font-size: 1.0rem;
+    }
+}
