@@ -5,15 +5,8 @@
     box-sizing: border-box;
 }
 
-/* 
- * NOTE: The Rakuten Sans font appears to be a proprietary font that would need to be obtained
- * from Rakuten Symphony's design team. For now, we'll use system sans-serif fonts as fallback.
- * When deploying to production, replace this with the actual Rakuten Sans font import.
- * 
- * Example once you have the proper URL: 
- * @import url('https://fonts.example.com/rakuten-sans.css');
- */
-@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700&display=swap');
+/* Import SF Pro font */
+@import url('https://fonts.cdnfonts.com/css/sf-pro-display');
 
 :root {
     /* Colors from RS_design.json */
@@ -26,9 +19,9 @@
     --border-color: #cccccc;
     --placeholder-bg: #f0f0f0; /* For chart placeholders */
 
-    /* Typography from RS_design.json with Montserrat as fallback */
-    --font-family-headings: "Rakuten Sans", Montserrat, sans-serif; /* Use Montserrat as fallback */
-    --font-family-body: "Rakuten Sans", Montserrat, sans-serif;    /* Use Montserrat as fallback */
+    /* Typography using SF Pro instead of Rakuten Sans */
+    --font-family-headings: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif; /* Use SF Pro */
+    --font-family-body: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;    /* Use SF Pro */
 
     /* Font Sizes (approximate mapping) */
     --font-size-h1: 3.0rem;  /* Mapped from 75px */
@@ -120,14 +113,19 @@ header, footer {
     padding: var(--spacing-m) 0;
 }
 
-/* Logo styling */
 .logo-container {
+    display: flex;
+    justify-content: center;
     margin-bottom: var(--spacing-m);
 }
 
 .rakuten-logo {
-    max-width: 200px;
+    max-width: 100%;
     height: auto;
+}
+
+header h1 {
+    margin-top: 0;
 }
 
 footer {
@@ -224,8 +222,10 @@ main {
     align-items: flex-end; /* Align bars to the bottom */
     height: 150px; /* Match pie chart height */
     padding: var(--spacing-s);
+    padding-top: 30px; /* Add extra padding at the top for the value labels */
     border: none; /* Remove placeholder border */
     background-color: transparent; /* Remove placeholder background */
+    margin-top: 10px; /* Add margin to create space between title and chart */
 }
 
 .bar-chart-bar {
@@ -257,7 +257,7 @@ main {
 
 .bar-chart-value {
     position: absolute;
-    top: -20px; /* Position value above the bar */
+    top: -25px; /* Increase distance above the bar */
     left: 50%;
     transform: translateX(-50%);
     font-size: var(--font-size-small);
@@ -349,6 +349,14 @@ main {
     font-size: var(--font-size-small);
 }
 
+.input-group .help-text {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-top: var(--spacing-xs);
+    font-style: italic;
+    line-height: 1.4;
+}
+
 .input-group input[type="number"] {
     width: 100%;
     padding: var(--spacing-s);
@@ -407,6 +415,11 @@ main {
 
 #visualizations .chart-container {
     margin-bottom: var(--spacing-l);
+    position: relative; /* Ensure proper positioning context */
+}
+
+.chart-container h4 {
+    margin-bottom: 15px; /* Increase space between title and chart */
 }
 
 /* Call to Action (CTA) Styling */

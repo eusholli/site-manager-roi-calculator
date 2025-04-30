@@ -11,10 +11,9 @@
 <body>
     <header>
         <div class="logo-container">
-            <img src="https://cdn.prod.website-files.com/6317e170a9eabbe0fbbf4519/6317e170a9eabb60ecbf46c6_Rakuten-Company.svg"
-                alt="Rakuten Symphony Logo" class="rakuten-logo">
+            <img src="rs_logo.svg" alt="Rakuten Symphony Logo" class="rakuten-logo" width="200">
         </div>
-        <h1>Rakuten Site Manager ROI Calculator</h1>
+        <h1>Site Manager ROI Calculator</h1>
     </header>
 
     <main>
@@ -56,13 +55,21 @@
                         <label for="efficiencyGain">Expected Efficiency Improvement (%):</label>
                         <input type="number" id="efficiencyGain" name="efficiencyGain" value="30" min="0" max="100"
                             step="1" required>
+                        <p class="help-text">The percentage improvement in project speed and administrative efficiency
+                            when using Site Manager. This reduces project duration and administrative hours.</p>
                     </div>
                     <div class="input-group">
                         <label for="costReduction">Expected Cost Reduction (%):</label>
                         <input type="number" id="costReduction" name="costReduction" value="20" min="0" max="100"
                             step="1" required>
+                        <p class="help-text">The percentage reduction in direct project costs (materials, labor, etc.)
+                            when using Site Manager. This is applied to your average cost per site/project.</p>
                     </div>
-                    <!-- Platform Cost input removed as requested -->
+                    <div class="input-group">
+                        <label for="platformCost">Rakuten Site Manager Implementation Cost ($/year):</label>
+                        <input type="number" id="platformCost" name="platformCost" value="250000" min="0" step="1000"
+                            required>
+                    </div>
                 </form>
             </section>
 
@@ -75,7 +82,7 @@
                         <span id="outputTotalSavings">$0</span>
                     </div>
                     <div>
-                        <h3>Return on Investment (ROI)</h3>
+                        <h3>ROI</h3>
                         <span id="outputROI">0%</span>
                     </div>
                 </div>
@@ -86,7 +93,7 @@
                     <p>Total Weeks Saved Annually: <span id="outputWeeksSaved">0</span></p>
                     <p>Total Project Cost Savings per Year: <span id="outputCostSavings">$0</span></p>
                     <p>Total Admin/Labor Cost Savings per Year: <span id="outputAdminSavings">$0</span></p>
-                    <!-- Breakeven point removed as it's no longer relevant without platform cost -->
+                    <p>Breakeven Point: <span id="outputBreakeven">N/A</span> months</p>
                 </div>
 
                 <div id="visualizations">
@@ -99,7 +106,10 @@
                         <h4>Project Duration (Before vs. After)</h4>
                         <div id="durationBarChart" class="placeholder-chart">Bar Chart Placeholder</div>
                     </div>
-                    <!-- Breakeven Timeline removed as it's no longer relevant without platform cost -->
+                    <div class="chart-container">
+                        <h4>Breakeven Timeline</h4>
+                        <div id="breakevenTimeline" class="placeholder-chart">Timeline Placeholder</div>
+                    </div>
                 </div>
             </section>
         </section>
