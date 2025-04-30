@@ -1,6 +1,6 @@
 # Rakuten Site Manager ROI Calculator
 
-A responsive web-based calculator that demonstrates the financial benefits of using Rakuten Site Manager for project management. This tool helps potential customers visualize cost savings, efficiency improvements, and return on investment. The implementation is now complete and ready for deployment to GitHub Pages.
+A responsive web-based calculator that demonstrates the financial benefits of using Rakuten Site Manager for project management. This tool helps potential customers visualize cost savings, efficiency improvements, and return on investment. 
 
 ## Overview
 
@@ -65,14 +65,6 @@ site-manager-roi-calculator/
    - Platform cost for Site Manager
 3. View the calculated results and visualizations that update in real-time
 4. Use the "Contact Rakuten Symphony" button to learn more
-
-## Deployment
-
-This project is designed to be deployed on GitHub Pages:
-
-1. Push the code to a GitHub repository
-2. Enable GitHub Pages in the repository settings
-3. The calculator will be available at `https://[username].github.io/site-manager-roi-calculator/`
 
 ## Implementation Details
 
